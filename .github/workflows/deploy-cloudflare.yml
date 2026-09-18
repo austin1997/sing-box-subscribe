@@ -34,7 +34,7 @@ jobs:
         run: uv sync --all-groups
 
       - name: Run adapter tests
-        run: uv run pytest -q tests/test_cloudflare_adapter.py
+        run: PYTHONPATH=. uv run pytest -q tests/test_cloudflare_adapter.py
 
       - name: Deploy Cloudflare Worker
         run: uv run pywrangler deploy
