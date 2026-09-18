@@ -45,6 +45,7 @@ subprocess.check_call = _worker_check_call
 
 # Import upstream Flask app first. main.py imports TEMP_DIR back from this
 # module, so this ordering avoids changing the upstream circular dependency.
+import api.app as _app_module  # noqa: E402
 from api.app import app  # noqa: E402
 import main as _main_module  # noqa: E402
 
@@ -81,7 +82,12 @@ install_runtime_patches(
         "vmess": parser_vmess,
         "wg": parser_wg,
     },
+    app_module=_app_module,
 )
+
+@app.get("/healthz")
+def _healthz():
+    return {"status": "ok", "runtime": "cloudflare-python-workers"}
 
 # The upstream Web UI stores TEMP_JSON_DATA in process memory. Workers may send
 # sequential requests to different isolates, so persist that editor state in
