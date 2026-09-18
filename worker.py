@@ -17,6 +17,7 @@ from pathlib import Path
 from cloudflare_adapter import (
     decode_state_cookie_parts,
     install_runtime_patches,
+    should_load_editor_state,
     run_upstream_main,
 )
 
@@ -98,6 +99,11 @@ _DEFAULT_TEMP_JSON_DATA = os.environ.get("TEMP_JSON_DATA", "{}")
 def _load_temp_json_cookie():
     # Never inherit editor state from a previous request in the same isolate.
     os.environ["TEMP_JSON_DATA"] = _DEFAULT_TEMP_JSON_DATA
+
+    # /config/<url> is intentionally stateless and must not inherit Web UI
+    # editor settings such as a custom save_config_path.
+    if not should_load_editor_state(flask_request.path):
+        return
 
     try:
         count = int(flask_request.cookies.get(_COOKIE_COUNT, "0"))
