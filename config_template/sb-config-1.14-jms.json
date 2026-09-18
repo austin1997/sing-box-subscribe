@@ -284,12 +284,12 @@
       "tag": "Proxy",
       "type": "selector",
       "outbounds": [
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan",
-        "Others",
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2",
+        "S801",
         "Direct"
       ],
       "default": "Direct",
@@ -300,13 +300,13 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan"
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2"
       ],
-      "default": "United States",
+      "default": "S3",
       "interrupt_exist_connections": true
     },
     {
@@ -314,13 +314,13 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan"
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2"
       ],
-      "default": "United States",
+      "default": "S3",
       "interrupt_exist_connections": true
     },
     {
@@ -328,11 +328,11 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan",
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2",
         "Direct"
       ],
       "default": "Direct",
@@ -343,13 +343,13 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan"
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2"
       ],
-      "default": "HongKong",
+      "default": "S1",
       "interrupt_exist_connections": true
     },
     {
@@ -357,13 +357,13 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan"
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2"
       ],
-      "default": "United States",
+      "default": "S3",
       "interrupt_exist_connections": true
     },
     {
@@ -371,13 +371,13 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan"
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2"
       ],
-      "default": "HongKong",
+      "default": "S1",
       "interrupt_exist_connections": true
     },
     {
@@ -385,11 +385,11 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan",
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2",
         "Direct"
       ],
       "interrupt_exist_connections": true
@@ -399,14 +399,14 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan",
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2",
         "Direct"
       ],
-      "default": "HongKong",
+      "default": "S1",
       "interrupt_exist_connections": true
     },
     {
@@ -414,14 +414,14 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan",
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2",
         "Direct"
       ],
-      "default": "United States",
+      "default": "S3",
       "interrupt_exist_connections": true
     },
     {
@@ -429,11 +429,11 @@
       "type": "selector",
       "outbounds": [
         "Proxy",
-        "HongKong",
-        "United States",
-        "Singapore",
-        "Japan",
-        "Taiwan"
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S2"
       ],
       "interrupt_exist_connections": true
     },
@@ -441,15 +441,15 @@
       "tag": "BiliBili",
       "type": "selector",
       "outbounds": [
-        "HongKong",
-        "Taiwan",
+        "S1",
+        "S2",
         "Direct"
       ],
       "default": "Direct",
       "interrupt_exist_connections": true
     },
     {
-      "tag": "HongKong",
+      "tag": "S1",
       "type": "selector",
       "outbounds": [
         "{all}"
@@ -458,13 +458,13 @@
         {
           "action": "include",
           "keywords": [
-            "(?<![A-Za-z0-9])s1(?![0-9])"
+            "s1"
           ]
         }
       ]
     },
     {
-      "tag": "Taiwan",
+      "tag": "S2",
       "type": "selector",
       "outbounds": [
         "{all}"
@@ -473,13 +473,13 @@
         {
           "action": "include",
           "keywords": [
-            "(?<![A-Za-z0-9])s2(?![0-9])"
+            "s2"
           ]
         }
       ]
     },
     {
-      "tag": "United States",
+      "tag": "S3",
       "type": "selector",
       "outbounds": [
         "{all}"
@@ -488,13 +488,13 @@
         {
           "action": "include",
           "keywords": [
-            "(?<![A-Za-z0-9])s3(?![0-9])"
+            "s3"
           ]
         }
       ]
     },
     {
-      "tag": "Singapore",
+      "tag": "S4",
       "type": "selector",
       "outbounds": [
         "{all}"
@@ -503,13 +503,13 @@
         {
           "action": "include",
           "keywords": [
-            "(?<![A-Za-z0-9])s4(?![0-9])"
+            "s4"
           ]
         }
       ]
     },
     {
-      "tag": "Japan",
+      "tag": "S5",
       "type": "selector",
       "outbounds": [
         "{all}"
@@ -518,13 +518,13 @@
         {
           "action": "include",
           "keywords": [
-            "(?<![A-Za-z0-9])s5(?![0-9])"
+            "s5"
           ]
         }
       ]
     },
     {
-      "tag": "Others",
+      "tag": "S801",
       "type": "selector",
       "outbounds": [
         "{all}"
@@ -533,7 +533,7 @@
         {
           "action": "include",
           "keywords": [
-            "(?<![A-Za-z0-9])s801(?![0-9])"
+            "s801"
           ]
         }
       ]
