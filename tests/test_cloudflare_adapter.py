@@ -9,6 +9,7 @@ from cloudflare_adapter import (
     decode_state_cookie_parts,
     decode_temp_json_arg,
     run_upstream_main,
+    should_load_editor_state,
 )
 
 
@@ -16,6 +17,13 @@ def test_decode_double_encoded_json():
     payload = {"subscribes": [], "save_config_path": "./config.json"}
     raw = json.dumps(json.dumps(payload))
     assert decode_temp_json_arg(raw) == payload
+
+
+def test_stateless_config_route_does_not_load_editor_state():
+    assert should_load_editor_state("/") is True
+    assert should_load_editor_state("/edit_temp_json") is True
+    assert should_load_editor_state("/generate_config") is True
+    assert should_load_editor_state("/config/https://example.com/sub") is False
 
 
 def test_decode_state_cookie_parts_accepts_valid_json():
