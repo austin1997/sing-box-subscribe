@@ -41,6 +41,11 @@ def decode_temp_json_arg(raw: str) -> dict[str, Any]:
     return value
 
 
+def should_load_editor_state(path: str) -> bool:
+    """Return whether the request should inherit Web UI editor state."""
+    return not path.startswith("/config/")
+
+
 def decode_state_cookie_parts(
     parts: Sequence[str],
     *,
