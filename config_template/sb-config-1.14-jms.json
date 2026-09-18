@@ -307,7 +307,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
@@ -323,7 +324,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
@@ -339,7 +341,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
@@ -355,7 +358,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
@@ -371,7 +375,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
@@ -387,7 +392,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
@@ -403,7 +409,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "interrupt_exist_connections": true,
       "default": "Auto"
@@ -419,7 +426,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
@@ -435,7 +443,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
@@ -451,7 +460,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "interrupt_exist_connections": true,
       "default": "Auto"
@@ -467,7 +477,8 @@
         "S3",
         "S4",
         "S5",
-        "S801"
+        "S801",
+        "Direct"
       ],
       "default": "Auto",
       "interrupt_exist_connections": true
