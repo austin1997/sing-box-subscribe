@@ -84,8 +84,12 @@ def decode_state_cookie_parts(
         return None
 
 
-def install_runtime_patches(main_module: Any, parser_modules: Mapping[str, Any]) -> None:
-    """Install Worker-safe path and parser-discovery shims on upstream main.py."""
+def install_runtime_patches(
+    main_module: Any,
+    parser_modules: Mapping[str, Any],
+    app_module: Any | None = None,
+) -> None:
+    """Install Worker-safe path, template and parser-discovery shims."""
     main_module.parsers_mod.clear()
     main_module.parsers_mod.update(parser_modules)
 
@@ -114,6 +118,30 @@ def install_runtime_patches(main_module: Any, parser_modules: Mapping[str, Any])
     main_module.get_template = get_template
     main_module.load_json = load_json
     main_module.tool.readFile = read_file
+
+    if app_module is not None:
+        def get_template_list() -> list[str]:
+            template_dir = BASE_DIR / "config_template"
+            return sorted(path.stem for path in template_dir.glob("*.json"))
+
+        def read_providers_json() -> dict[str, Any]:
+            temp_json_data = app_module.get_temp_json_data()
+            if temp_json_data:
+                return temp_json_data
+            return json.loads(
+                (BASE_DIR / "providers.json").read_text(encoding="utf-8")
+            )
+
+        app_module.get_template_list = get_template_list
+        app_module.read_providers_json = read_providers_json
+
+        try:
+            from jinja2 import FileSystemLoader
+            app_module.app.jinja_loader = FileSystemLoader(
+                str(BASE_DIR / "templates")
+            )
+        except Exception:
+            pass
 
 
 def run_upstream_main(main_module: Any, argv: Sequence[str]) -> int:
