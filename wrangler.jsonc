@@ -11,5 +11,24 @@
   },
   "observability": {
     "enabled": true
-  }
+  },
+  "find_additional_modules": true,
+  "base_dir": ".",
+  "rules": [
+    {
+      "type": "Text",
+      "globs": [
+        "templates/**/*.html"
+      ],
+      "fallthrough": true
+    },
+    {
+      "type": "Text",
+      "globs": [
+        "config_template/**/*.json",
+        "providers.json"
+      ],
+      "fallthrough": true
+    }
+  ]
 }
