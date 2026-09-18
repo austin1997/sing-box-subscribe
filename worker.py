@@ -14,7 +14,11 @@ import traceback
 import zlib
 from pathlib import Path
 
-from cloudflare_adapter import install_runtime_patches, run_upstream_main
+from cloudflare_adapter import (
+    decode_state_cookie_parts,
+    install_runtime_patches,
+    run_upstream_main,
+)
 
 # Patch before importing api.app so its module-level ``subprocess`` reference
 # points to this same module object.
@@ -87,27 +91,33 @@ _COOKIE_COUNT = "sbs_temp_n"
 _COOKIE_PREFIX = "sbs_temp_"
 _COOKIE_CHUNK = 3000
 _COOKIE_MAX_CHUNKS = 8
+_COOKIE_MAX_DECOMPRESSED = 256 * 1024
+_DEFAULT_TEMP_JSON_DATA = os.environ.get("TEMP_JSON_DATA", "{}")
 
 
 def _load_temp_json_cookie():
+    # Never inherit editor state from a previous request in the same isolate.
+    os.environ["TEMP_JSON_DATA"] = _DEFAULT_TEMP_JSON_DATA
+
     try:
         count = int(flask_request.cookies.get(_COOKIE_COUNT, "0"))
     except ValueError:
         return
     if count < 1 or count > _COOKIE_MAX_CHUNKS:
         return
-    parts = [flask_request.cookies.get(f"{_COOKIE_PREFIX}{i}", "") for i in range(count)]
-    if any(not part for part in parts):
-        return
-    try:
-        compressed = base64.urlsafe_b64decode("".join(parts).encode("ascii"))
-        value = zlib.decompress(compressed).decode("utf-8")
-        import json
 
-        if isinstance(json.loads(value), dict):
-            os.environ["TEMP_JSON_DATA"] = value
-    except Exception:
-        return
+    parts = [
+        flask_request.cookies.get(f"{_COOKIE_PREFIX}{i}", "")
+        for i in range(count)
+    ]
+    value = decode_state_cookie_parts(
+        parts,
+        chunk_size=_COOKIE_CHUNK,
+        max_chunks=_COOKIE_MAX_CHUNKS,
+        max_output_size=_COOKIE_MAX_DECOMPRESSED,
+    )
+    if value is not None:
+        os.environ["TEMP_JSON_DATA"] = value
 
 
 def _save_temp_json_cookie(response):
