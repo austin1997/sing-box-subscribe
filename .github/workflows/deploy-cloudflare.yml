@@ -36,6 +36,9 @@ jobs:
       - name: Run adapter tests
         run: PYTHONPATH=. uv run pytest -q tests/test_cloudflare_adapter.py
 
+      - name: Prepare Cloudflare build
+        run: rm -f requirements.txt
+
       - name: Deploy Cloudflare Worker
         run: uv run pywrangler deploy
         env:
