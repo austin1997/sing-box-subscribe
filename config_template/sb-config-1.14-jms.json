@@ -284,168 +284,192 @@
       "tag": "Proxy",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2",
         "S801",
         "Direct"
       ],
-      "default": "Direct",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "AI",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2"
+        "S801"
       ],
-      "default": "S3",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "Google",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2"
+        "S801"
       ],
-      "default": "S3",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "Microsoft",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2",
-        "Direct"
+        "S801"
       ],
-      "default": "Direct",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "Social",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2"
+        "S801"
       ],
-      "default": "S1",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "TikTok",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2"
+        "S801"
       ],
-      "default": "S3",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "Telegram",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2"
+        "S801"
       ],
-      "default": "S1",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "Game",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2",
-        "Direct"
+        "S801"
       ],
-      "interrupt_exist_connections": true
+      "interrupt_exist_connections": true,
+      "default": "Auto"
     },
     {
       "tag": "Emby",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2",
-        "Direct"
+        "S801"
       ],
-      "default": "S1",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "Spotify",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2",
-        "Direct"
+        "S801"
       ],
-      "default": "S3",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
       "tag": "Streaming",
       "type": "selector",
       "outbounds": [
+        "Auto",
         "Proxy",
         "S1",
+        "S2",
         "S3",
         "S4",
         "S5",
-        "S2"
+        "S801"
       ],
-      "interrupt_exist_connections": true
+      "interrupt_exist_connections": true,
+      "default": "Auto"
     },
     {
       "tag": "BiliBili",
       "type": "selector",
       "outbounds": [
+        "Auto",
+        "Proxy",
         "S1",
         "S2",
-        "Direct"
+        "S3",
+        "S4",
+        "S5",
+        "S801"
       ],
-      "default": "Direct",
+      "default": "Auto",
       "interrupt_exist_connections": true
     },
     {
