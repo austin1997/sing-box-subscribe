@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sing-box-subscribe",
+  "main": "worker.py",
+  "compatibility_date": "2026-09-18",
+  "compatibility_flags": [
+    "python_workers"
+  ],
+  "assets": {
+    "directory": "./public"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
