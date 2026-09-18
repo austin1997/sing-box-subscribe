@@ -8,8 +8,10 @@ and runs the exact same orchestration in-process.
 
 from __future__ import annotations
 
+import base64
 import json
 import tempfile
+import zlib
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, Mapping, Sequence
@@ -37,6 +39,44 @@ def decode_temp_json_arg(raw: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError("--temp_json_data must decode to a JSON object")
     return value
+
+
+def decode_state_cookie_parts(
+    parts: Sequence[str],
+    *,
+    chunk_size: int,
+    max_chunks: int,
+    max_output_size: int,
+) -> str | None:
+    """Safely decode compressed editor state from bounded cookie chunks."""
+    if not parts or len(parts) > max_chunks:
+        return None
+    if any(not part or len(part) > chunk_size for part in parts):
+        return None
+
+    encoded = "".join(parts)
+    if len(encoded) > chunk_size * max_chunks:
+        return None
+
+    try:
+        compressed = base64.b64decode(
+            encoded.encode("ascii"), altchars=b"-_", validate=True
+        )
+        decompressor = zlib.decompressobj()
+        raw = decompressor.decompress(compressed, max_output_size + 1)
+
+        if len(raw) > max_output_size:
+            return None
+        if decompressor.unconsumed_tail or not decompressor.eof:
+            return None
+        if decompressor.unused_data:
+            return None
+
+        value = raw.decode("utf-8")
+        parsed = json.loads(value)
+        return value if isinstance(parsed, dict) else None
+    except (ValueError, UnicodeDecodeError, zlib.error):
+        return None
 
 
 def install_runtime_patches(main_module: Any, parser_modules: Mapping[str, Any]) -> None:
@@ -126,7 +166,11 @@ def run_upstream_main(main_module: Any, argv: Sequence[str]) -> int:
         final_config = main_module.combin_to_config(config, nodes)
 
     requested_path = str(providers.get("save_config_path", "config.json"))
-    output_name = Path(requested_path).name or "config.json"
-    output_path = str(Path(tempfile.gettempdir()) / output_name)
-    main_module.save_config(output_path, final_config)
+    if requested_path.startswith("./"):
+        requested_path = requested_path[2:]
+    requested_path = requested_path or "config.json"
+
+    output_path = Path(tempfile.gettempdir()) / requested_path
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    main_module.save_config(str(output_path), final_config)
     return 0
